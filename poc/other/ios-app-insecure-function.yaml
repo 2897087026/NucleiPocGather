@@ -1,0 +1,41 @@
+file:
+- denylist:
+  - .js
+  - .nib
+  - .json
+  - .html
+  - .txt
+  - .plist
+  - .xml
+  - .mobileprovision
+  - .xma
+  - .sh
+  - .md
+  - .h
+  - .car
+  - .sqlite
+  extensions:
+  - all
+  extractors:
+  - regex:
+    - malloc
+    - fopen
+    - memcpy
+    - printf
+    - sprintf
+    - sscanf
+    - stat
+    - strcat
+    - strcpy
+    - strlen
+    - strncpy
+    - strtok
+    - vsnprintf
+    - srand
+    type: regex
+id: ios-app-insecure-function
+info:
+  author: adibarsyad
+  description: Check insecure function
+  name: insecure function use in the application
+  severity: Info

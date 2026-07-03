@@ -1,0 +1,45 @@
+http:
+- extractors:
+  - group: 1
+    name: version
+    part: body
+    regex:
+    - (?mi)Stable tag:\s*([0-9.]+)
+    type: regex
+  matchers:
+  - status:
+    - 200
+    type: status
+  - part: body
+    type: word
+    words:
+    - wordpress-sentinel
+  - dsl:
+    - compare_versions(version, '<= 1.0.0')
+    type: dsl
+  matchers-condition: and
+  max-redirects: 3
+  method: GET
+  path:
+  - '{{BaseURL}}/wp-content/plugins/wordpress-sentinel/readme.txt'
+  redirects: true
+id: wordpress_sentinel-c16b6a15-9f15-44a6-8663-201f64af81cc
+info:
+  author: topscoder
+  classification:
+    cve-id: null
+    cvss-metrics: null
+    cvss-score: null
+  description: ''
+  metadata:
+    fofa-query: wp-content/plugins/wordpress-sentinel/
+    google-query: inurl:"/wp-content/plugins/wordpress-sentinel/"
+    shodan-query: http.html:"wp-content/plugins/wordpress-sentinel/"
+  name: 'WordPress Sentinel < 1.0.1 - SQL Injection
+
+    '
+  reference:
+  - https://github.com/topscoder/nuclei-wordfence-cve
+  - https://www.wordfence.com/threat-intel/vulnerabilities/id/c16b6a15-9f15-44a6-8663-201f64af81cc?source=api-scan
+  severity: critical
+  tags: cve,wordpress,wp-plugin,wordpress-sentinel,critical,candidate

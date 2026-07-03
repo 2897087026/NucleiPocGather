@@ -1,0 +1,43 @@
+http:
+- extractors:
+  - group: 1
+    name: version
+    part: body
+    regex:
+    - (?mi)Stable tag:\s*([0-9.]+)
+    type: regex
+  matchers:
+  - status:
+    - 200
+    type: status
+  - part: body
+    type: word
+    words:
+    - woocommerce-product-importer
+  - dsl:
+    - compare_versions(version, '<= 1.5.2')
+    type: dsl
+  matchers-condition: and
+  max-redirects: 3
+  method: GET
+  path:
+  - '{{BaseURL}}/wp-content/plugins/woocommerce-product-importer/readme.txt'
+  redirects: true
+id: woocommerce_product_importer-d8d44f9b-0eee-49ee-b640-40f3bd377be0
+info:
+  author: topscoder
+  classification:
+    cve-id: null
+    cvss-metrics: null
+    cvss-score: null
+  description: ''
+  metadata:
+    fofa-query: wp-content/plugins/woocommerce-product-importer/
+    google-query: inurl:"/wp-content/plugins/woocommerce-product-importer/"
+    shodan-query: http.html:"wp-content/plugins/woocommerce-product-importer/"
+  name: "WooCommerce \u2013 Product Importer  <= 1.5.2 - Reflected Cross-Site Scripting\n"
+  reference:
+  - https://github.com/topscoder/nuclei-wordfence-cve
+  - https://www.wordfence.com/threat-intel/vulnerabilities/id/d8d44f9b-0eee-49ee-b640-40f3bd377be0?source=api-scan
+  severity: medium
+  tags: cve,wordpress,wp-plugin,woocommerce-product-importer,medium,candidate

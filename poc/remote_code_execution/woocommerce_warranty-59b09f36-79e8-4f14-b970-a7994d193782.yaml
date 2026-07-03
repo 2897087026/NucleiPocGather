@@ -1,0 +1,45 @@
+http:
+- extractors:
+  - group: 1
+    name: version
+    part: body
+    regex:
+    - (?mi)Stable tag:\s*([0-9.]+)
+    type: regex
+  matchers:
+  - status:
+    - 200
+    type: status
+  - part: body
+    type: word
+    words:
+    - woocommerce-warranty
+  - dsl:
+    - compare_versions(version, '<= 2.1.9')
+    type: dsl
+  matchers-condition: and
+  max-redirects: 3
+  method: GET
+  path:
+  - '{{BaseURL}}/wp-content/plugins/woocommerce-warranty/readme.txt'
+  redirects: true
+id: woocommerce_warranty-59b09f36-79e8-4f14-b970-a7994d193782
+info:
+  author: topscoder
+  classification:
+    cve-id: null
+    cvss-metrics: null
+    cvss-score: null
+  description: ''
+  metadata:
+    fofa-query: wp-content/plugins/woocommerce-warranty/
+    google-query: inurl:"/wp-content/plugins/woocommerce-warranty/"
+    shodan-query: http.html:"wp-content/plugins/woocommerce-warranty/"
+  name: 'WooCommerce Warranty Requests <= 2.1.9 - Missing Authorization
+
+    '
+  reference:
+  - https://github.com/topscoder/nuclei-wordfence-cve
+  - https://www.wordfence.com/threat-intel/vulnerabilities/id/59b09f36-79e8-4f14-b970-a7994d193782?source=api-scan
+  severity: high
+  tags: cve,wordpress,wp-plugin,woocommerce-warranty,high,candidate

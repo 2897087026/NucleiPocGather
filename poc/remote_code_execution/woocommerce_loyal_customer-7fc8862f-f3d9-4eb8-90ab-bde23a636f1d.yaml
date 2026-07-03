@@ -1,0 +1,45 @@
+http:
+- extractors:
+  - group: 1
+    name: version
+    part: body
+    regex:
+    - (?mi)Stable tag:\s*([0-9.]+)
+    type: regex
+  matchers:
+  - status:
+    - 200
+    type: status
+  - part: body
+    type: word
+    words:
+    - woocommerce-loyal-customer
+  - dsl:
+    - compare_versions(version, '<= 2.6')
+    type: dsl
+  matchers-condition: and
+  max-redirects: 3
+  method: GET
+  path:
+  - '{{BaseURL}}/wp-content/plugins/woocommerce-loyal-customer/readme.txt'
+  redirects: true
+id: woocommerce_loyal_customer-7fc8862f-f3d9-4eb8-90ab-bde23a636f1d
+info:
+  author: topscoder
+  classification:
+    cve-id: null
+    cvss-metrics: null
+    cvss-score: null
+  description: ''
+  metadata:
+    fofa-query: wp-content/plugins/woocommerce-loyal-customer/
+    google-query: inurl:"/wp-content/plugins/woocommerce-loyal-customer/"
+    shodan-query: http.html:"wp-content/plugins/woocommerce-loyal-customer/"
+  name: 'WooCommerce Loyal Customers <= 2.6 - Missing Authorization
+
+    '
+  reference:
+  - https://github.com/topscoder/nuclei-wordfence-cve
+  - https://www.wordfence.com/threat-intel/vulnerabilities/id/7fc8862f-f3d9-4eb8-90ab-bde23a636f1d?source=api-scan
+  severity: high
+  tags: cve,wordpress,wp-plugin,woocommerce-loyal-customer,high,candidate

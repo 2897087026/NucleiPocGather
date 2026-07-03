@@ -1,0 +1,46 @@
+http:
+- extractors:
+  - group: 1
+    name: version
+    part: body
+    regex:
+    - (?mi)Stable tag:\s*([0-9.]+)
+    type: regex
+  matchers:
+  - status:
+    - 200
+    type: status
+  - part: body
+    type: word
+    words:
+    - woocommerce-delivery-notes
+  - dsl:
+    - compare_versions(version, '<= 5.8.0')
+    type: dsl
+  matchers-condition: and
+  max-redirects: 3
+  method: GET
+  path:
+  - '{{BaseURL}}/wp-content/plugins/woocommerce-delivery-notes/readme.txt'
+  redirects: true
+id: woocommerce_delivery_notes-e52b34fe-2414-4d6f-bf43-9c5b65ebf769
+info:
+  author: topscoder
+  classification:
+    cve-id: null
+    cvss-metrics: null
+    cvss-score: null
+  description: ''
+  metadata:
+    fofa-query: wp-content/plugins/woocommerce-delivery-notes/
+    google-query: inurl:"/wp-content/plugins/woocommerce-delivery-notes/"
+    shodan-query: http.html:"wp-content/plugins/woocommerce-delivery-notes/"
+  name: 'Print Invoice & Delivery Notes for WooCommerce <= 5.8.0 - Unauthenticated
+    Remote Code Execution
+
+    '
+  reference:
+  - https://github.com/topscoder/nuclei-wordfence-cve
+  - https://www.wordfence.com/threat-intel/vulnerabilities/id/e52b34fe-2414-4d6f-bf43-9c5b65ebf769?source=api-scan
+  severity: critical
+  tags: cve,wordpress,wp-plugin,woocommerce-delivery-notes,critical,candidate
