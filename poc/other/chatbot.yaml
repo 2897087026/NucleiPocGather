@@ -1,58 +1,22 @@
 id: chatbot
-
 info:
-  name: >
-    AI ChatBot <= 4.8.9 and 4.9.2 - Cross-Site Request Forgery on AJAX actions
-  author: topscoder
-  severity: medium
-  description: >
-    
-  reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/846bd929-45cd-4e91-b232-ae16dd2b12a0?source=api-scan
-  classification:
-    cvss-metrics: 
-    cvss-score: 
-    cve-id: 
+  name: chatbot
+  author: cn-kali-team
+  tags: detect,tech,chatbot
+  severity: info
   metadata:
-    fofa-query: "wp-content/plugins/chatbot/"
-    google-query: inurl:"/wp-content/plugins/chatbot/"
-    shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,chatbot,medium
-
+    fofa-query:
+    - body="wp_chatbot_obj"
+    product: chatbot
+    shodan-query:
+    - http.html:"wp_chatbot_obj"
+    vendor: quantumcloud
+    verified: true
 http:
-  - method: GET
-    redirects: true
-    max-redirects: 3
-    path:
-      - "{{BaseURL}}/wp-content/plugins/chatbot/readme.txt"
-
-    extractors:
-      - type: regex
-        name: version
-        part: body
-        group: 1
-        internal: true
-        regex:
-          - "(?mi)Stable tag: ([0-9.]+)"
-
-      - type: regex
-        name: version
-        part: body
-        group: 1
-        regex:
-          - "(?mi)Stable tag: ([0-9.]+)"
-
-    matchers-condition: and
-    matchers:
-      - type: status
-        status:
-          - 200
-
-      - type: word
-        words:
-          - "chatbot"
-        part: body
-
-      - type: dsl
-        dsl:
-          - compare_versions(version, '4.9.2')
+- method: GET
+  path:
+  - '{{BaseURL}}/'
+  matchers:
+  - type: word
+    words:
+    - wp_chatbot_obj
