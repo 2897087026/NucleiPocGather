@@ -1,15 +1,15 @@
-id: blocksy_companion_pro-21dcb733-0477-46b3-a409-9823c03cbdca
+id: blocksy_companion_pro-0b2051e8-3195-498a-9d76-8645fd8476c1
 
 info:
   name: >
-    Blocksy Companion Pro <= 2.1.46 - Unauthenticated Insecure Direct Object Reference
+    Blocksy Companion Pro <= 2.1.46 - Unauthenticated Remote Code Execution
   author: topscoder
-  severity: low
+  severity: critical
   description: >
     
   reference:
     - https://github.com/topscoder/nuclei-wordfence-cve
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/21dcb733-0477-46b3-a409-9823c03cbdca?source=api-scan
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/0b2051e8-3195-498a-9d76-8645fd8476c1?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -18,7 +18,7 @@ info:
     fofa-query: "wp-content/plugins/blocksy-companion-pro/"
     google-query: inurl:"/wp-content/plugins/blocksy-companion-pro/"
     shodan-query: 'http.html:"wp-content/plugins/blocksy-companion-pro/"'
-  tags: cve,wordpress,wp-plugin,blocksy-companion-pro,low,candidate
+  tags: cve,wordpress,wp-plugin,blocksy-companion-pro,critical,candidate
 
 http:
   - method: GET
