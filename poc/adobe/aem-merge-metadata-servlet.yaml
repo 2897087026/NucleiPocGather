@@ -8,7 +8,7 @@ info:
   tags: aem
 
 
-http:
+requests:
   - method: GET
     path:
       - '{{BaseURL}}/libs/dam/merge/metadata.html?path=/etc&.ico'

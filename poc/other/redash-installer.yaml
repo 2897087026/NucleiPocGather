@@ -9,7 +9,7 @@ info:
     shodan-query: html:"Redash Initial Setup"
   tags: misconfig,redash,install
 
-http:
+requests:
   - method: GET
     path:
       - '{{BaseURL}}/setup'

@@ -6,7 +6,7 @@ info:
   severity: low
   tags: exposure,files,iceflow,logs
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/log/system.log"

@@ -9,7 +9,7 @@ info:
     shodan-query: title:"Install Binom"
   tags: misconfig,binom,install,exposure
 
-http:
+requests:
   - method: GET
     path:
       - '{{BaseURL}}/'

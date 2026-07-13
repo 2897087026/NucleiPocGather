@@ -9,7 +9,7 @@ info:
     shodan-query: title:"UniFi Wizard"
   tags: misconfig,install,unifi,exposure
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/manage/wizard/"

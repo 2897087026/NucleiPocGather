@@ -9,7 +9,7 @@ info:
     shodan-query: http.title:"OrangeHRM Web Installation Wizard"
   tags: misconfig,exposure,install,orangehrm
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/installer/installerUI.php"

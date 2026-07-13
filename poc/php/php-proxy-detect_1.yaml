@@ -5,8 +5,10 @@ info:
   author: pikpikcu
   severity: info
   tags: tech,php,proxy
+  metadata:
+    max-request: 2
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -29,4 +31,4 @@ requests:
         part: body
         group: 1
         regex:
-          - 'PHP\-Proxy<\/a> ([0-9.]+)<\/div>'
+          - '<meta name="version" content="([0-9.]+)">'

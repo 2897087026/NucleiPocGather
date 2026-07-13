@@ -9,7 +9,7 @@ info:
     shodan-query: title:"Postgres exporter"
   tags: postgres,exposure,debug
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/metrics"

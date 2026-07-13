@@ -9,7 +9,7 @@ info:
     shodan-query: 'title:"Monstra :: Install"'
   tags: misconfig,monstra,install
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"
