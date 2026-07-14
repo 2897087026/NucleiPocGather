@@ -31,7 +31,7 @@ jobs:
           sed -i "s@VERSION=.*@VERSION=${version}@g" $filename/static.env
           sed -i "s@Version=.*@Version=${version}@g" $filename/quick_start.sh
           tar -czvf $filename.tar.gz $filename
-          echo "::set-output name=VERSION::$(echo $version)"
+          echo "VERSION=$version" >> $GITHUB_OUTPUT
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
