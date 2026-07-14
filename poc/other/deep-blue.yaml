@@ -1,18 +1,17 @@
 id: deep-blue
 
 info:
-  name: >
-    Deep Blue <= 1.9.2 - Arbitrary File Upload
+  name: "Deep Blue <= 1.9.2 - Arbitrary File Upload"
   author: topscoder
   severity: critical
-  description: >
-    
+  description: "The Deep Blue theme for WordPress is vulnerable to arbitrary file uploads due to missing file type validation via the upload.php file in versions up to, and including, 1.9.2. This makes it possible for unauthenticated attackers to upload arbitrary files on the affected sites server which may make remote code execution possible."
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/e7b78960-51ff-440f-8831-d50c11961d9d?source=api-scan
+    - https://packetstormsecurity.com/files/113843/
+    - https://vulners.com/zdt/1337DAY-ID-18688
   classification:
-    cvss-metrics: 
-    cvss-score: 
-    cve-id: 
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
+    cvss-score: 9.8
+    cve-id:
   metadata:
     fofa-query: "wp-content/themes/deep-blue/"
     google-query: inurl:"/wp-content/themes/deep-blue/"

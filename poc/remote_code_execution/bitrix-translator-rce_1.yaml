@@ -28,5 +28,5 @@ info:
   reference:
   - https://sploitus.com/exploit?id=PACKETSTORM:212893
   - https://www.bitrix24.com/features/box/box-versions.php?module=Translate
-  severity: Medium
+  severity: medium
   tags: bitrix,rce

@@ -1,15 +1,15 @@
-id: minterpress-46da079f1eade3d76008b6e429cf8260
+id: minterpress
 
 info:
   name: >
-    Minterpress <= 1.0.5 - Missing Authorization to Authenticated (Subscriber+) Arbitrary Options Update
+    Minterpress <= 1.0.5 - Missing Authorization to Authenticated (Subscriber+) Arbitrary Content Deletion
   author: topscoder
   severity: low
   description: >
     
   reference:
     - https://github.com/topscoder/nuclei-wordfence-cve
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/c2151c87-0df3-477a-a1b2-7d2e5bc44eb5?source=api-scan
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/4a198600-9c47-46bc-97b6-d7f90493d43e?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 

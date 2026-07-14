@@ -2,13 +2,14 @@ id: computer-repair-shop
 
 info:
   name: >
-    Computer Repair Shop < 2.0 - Authenticated (Admin+) Stored Cross-Site Scripting
+    CRM WordPress Plugin – RepairBuddy <= 3.72 - SQL Injection
   author: topscoder
-  severity: low
+  severity: critical
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/03b1376e-8ef3-4bd2-904b-6819aa21d144?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/642a6d42-100f-4461-b568-35e089287902?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -17,7 +18,7 @@ info:
     fofa-query: "wp-content/plugins/computer-repair-shop/"
     google-query: inurl:"/wp-content/plugins/computer-repair-shop/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,computer-repair-shop,low
+  tags: cve,wordpress,wp-plugin,computer-repair-shop,critical
 
 http:
   - method: GET
@@ -55,4 +56,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '< 2.0')
+          - compare_versions(version, '<= 3.72')

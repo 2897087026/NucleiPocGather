@@ -1,18 +1,18 @@
 id: bulk-change
 
 info:
-  name: >
-    Bulk change of posts terms and post types <= 1.0 - Reflected Cross-Site Scripting
+  name: "Bulk change of posts terms and post types <= 1.0 - Reflected Cross-Site Scripting"
   author: topscoder
   severity: medium
-  description: >
-    The Bulk change of posts terms and post types plugin for WordPress is vulnerable to Stored Cross-Site Scripting via the ‘s’ parameter in versions up to, and including, 1.0 due to insufficient input sanitization and output escaping. This makes it possible for unauthenticated attackers to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page.
+  description: "The Bulk change of posts terms and post types plugin for WordPress is vulnerable to Stored Cross-Site Scripting via the ‘s’ parameter in versions up to, and including, 1.0 due to insufficient input sanitization and output escaping. This makes it possible for unauthenticated attackers to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page."
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/aac6fcee-cb8b-4862-a1f1-9af692ae741f?source=api-prod
+    - https://www.acunetix.com/vulnerabilities/web/wordpress-plugin-bulk-change-of-posts-terms-and-post-types-cross-site-scripting-1-0/
+    - http://www.vapidlabs.com/wp/wp_advisory.php?v=700
+    - https://web.archive.org/web/20200901050009/https%3A//zeroaptitude.com/misha/wordpress-plugin-bug-hunting-part-2/
   classification:
     cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N
     cvss-score: 6.1
-    cve-id: 
+    cve-id:
   metadata:
     fofa-query: "wp-content/plugins/bulk-change/"
     google-query: inurl:"/wp-content/plugins/bulk-change/"

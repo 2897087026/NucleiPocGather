@@ -2,13 +2,14 @@ id: bello
 
 info:
   name: >
-    Bello - Directory & Listing <= 1.5.9 - Unauthenticated SQL Injection
+    Bello - Directory & Listing  - < 1.6.0 - Cross-Site Scripting
   author: topscoder
-  severity: low
+  severity: high
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/1fa39169-1cba-43ce-aa29-adf7ce09ce75?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/c2f10cc4-82a8-4668-b1e5-a08a0f79b59c?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -17,7 +18,7 @@ info:
     fofa-query: "wp-content/themes/bello/"
     google-query: inurl:"/wp-content/themes/bello/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-theme,bello,low
+  tags: cve,wordpress,wp-theme,bello,high
 
 http:
   - method: GET

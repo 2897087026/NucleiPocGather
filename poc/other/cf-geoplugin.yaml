@@ -2,13 +2,14 @@ id: cf-geoplugin
 
 info:
   name: >
-    Geo Controller <= 8.5.2 - Authenticated (Contributor+) Stored Cross-Site Scripting
+    Geo Controller <= 8.6.4 - Unauthenticated PHP Object Injection via shortcode REST API Route
   author: topscoder
-  severity: low
+  severity: critical
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/6faf7e36-52d7-4578-bb71-2b64a761692b?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/6f00bbab-ef84-42cf-baa7-23c434416981?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -17,7 +18,7 @@ info:
     fofa-query: "wp-content/plugins/cf-geoplugin/"
     google-query: inurl:"/wp-content/plugins/cf-geoplugin/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,cf-geoplugin,low
+  tags: cve,wordpress,wp-plugin,cf-geoplugin,critical
 
 http:
   - method: GET
@@ -55,4 +56,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '<= 8.5.2')
+          - compare_versions(version, '<= 8.6.4')

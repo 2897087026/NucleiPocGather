@@ -2,13 +2,14 @@ id: cornerstone
 
 info:
   name: >
-    Cornerstone <= 0.8.0 - Reflected Cross-Site Scripting via PHP_SELF
+    Cornerstone <= 0.8.0 - Reflected Cross-Site Scripting
   author: topscoder
   severity: medium
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/5c18a9b8-5041-4451-a3cc-91952c234d9c?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/5f75dfef-b30f-45a5-ba3e-cb82c1443800?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 

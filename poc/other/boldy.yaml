@@ -1,23 +1,21 @@
 id: boldy
 
 info:
-  name: >
-    Site5 Various Affected Themes (Various Versions) - Email Spoofing
+  name: "Site5 Various Affected Themes (Various Versions) - Email Spoofing"
   author: topscoder
-  severity: medium
-  description: >
-    Various Site5 themes for WordPress are vulnerable to Email Spoofing. This makes it possible for unauthenticated attackers to modify email addresses to potentially perform future attacks on other users.
+  severity: low
+  description: "Various Site5 themes for WordPress are vulnerable to Email Spoofing. This makes it possible for unauthenticated attackers to modify email addresses to potentially perform future attacks on other users."
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/07bccf56-99b2-42e6-93ab-606af65e6cac?source=api-prod
+
   classification:
-    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N
-    cvss-score: 5.3
-    cve-id: 
+    cvss-metrics:
+    cvss-score:
+    cve-id:
   metadata:
-    fofa-query: "wp-content/themes/boldy/"
-    google-query: inurl:"/wp-content/themes/boldy/"
+    fofa-query: "wp-content/unknown/boldy/"
+    google-query: inurl:"/wp-content/unknown/boldy/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-theme,boldy,medium
+  tags: cve,wordpress,wp-theme,boldy,low
 
 http:
   - method: GET
@@ -55,4 +53,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '< 2.0')
+          - compare_versions(version, '<= 2.0')

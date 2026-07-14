@@ -2,13 +2,14 @@ id: client-dash
 
 info:
   name: >
-    Client Dash <= 2.2.1 - Authenticated (Administrator+) Stored Cross-Site Scripting via settings
+    Client Dash <= 2.2.1 - Missing Authorization
   author: topscoder
-  severity: low
+  severity: high
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/7f8839cf-9e48-4981-8a0d-bb0c06cdf441?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/af3105ed-d383-4ce6-9317-5762f97b14e3?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -17,7 +18,7 @@ info:
     fofa-query: "wp-content/plugins/client-dash/"
     google-query: inurl:"/wp-content/plugins/client-dash/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,client-dash,low
+  tags: cve,wordpress,wp-plugin,client-dash,high
 
 http:
   - method: GET

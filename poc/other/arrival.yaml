@@ -2,13 +2,14 @@ id: arrival
 
 info:
   name: >
-    AccessPress Themes and Plugin <= Various Versions - Missing Authorization to Arbitrary Plugin Deactivation/Activation
+    AccessPress Themes and Plugin <= Various Versions - Authenticated (Subscriber+) Arbitrary File Upload
   author: topscoder
-  severity: high
+  severity: low
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/9e15727a-35c4-42c0-9997-cdcd40ac8e5f?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/4ef1a097-955c-4a0e-a1a2-b34ae2903d0e?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -17,7 +18,7 @@ info:
     fofa-query: "wp-content/themes/arrival/"
     google-query: inurl:"/wp-content/themes/arrival/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-theme,arrival,high
+  tags: cve,wordpress,wp-theme,arrival,low
 
 http:
   - method: GET

@@ -2,13 +2,14 @@ id: arconix-faq
 
 info:
   name: >
-    Multiple Plugins by tychesoftwares <= (Various Versions) - Missing Authorization to Notice Dismissal
+    Arconix FAQ <= 1.9.4 - Missing Authorization
   author: topscoder
   severity: high
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/8a07d293-4c50-4be0-955f-b7c4a0eaef4b?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/4f76181a-8fb4-4f0e-b84c-0dabc482261d?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -55,4 +56,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '<= 1.9.3')
+          - compare_versions(version, '<= 1.9.4')

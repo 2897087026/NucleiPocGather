@@ -1,4 +1,5 @@
 id: teltonika-login
+
 info:
   name: Teltonika Login panel
   author: idealphase
@@ -10,15 +11,18 @@ info:
   metadata:
     google-dork: intitle:"Teltonika -Web UI" | intitle:"Teltonika-RUT -Web UI" inurl:"/cgi-bin/luci"
   tags: panel,teltonika
+
 requests:
   - method: GET
     path:
       - '{{BaseURL}}/cgi-bin/luci'
+
     matchers-condition: and
     matchers:
       - type: regex
         regex:
           - '<title>Teltonika(.*) - Web UI</title>'
+
       - type: status
         status:
           - 200

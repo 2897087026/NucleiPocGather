@@ -2,13 +2,14 @@ id: careerfy
 
 info:
   name: >
-    Careerfy < 3.9.0 - Cross-Site Scripting
+    Careerfy <= 4.0.0 - Cross-Site Scripting
   author: topscoder
   severity: high
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/a3e8e42f-8ee5-40ff-934f-b7d580bc5548?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/63df43cc-7f84-4316-80fc-b0242b9f454c?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -55,4 +56,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '< 3.9.0')
+          - compare_versions(version, '<= 4.0.0')

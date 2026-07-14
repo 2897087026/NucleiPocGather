@@ -2,13 +2,14 @@ id: embedpress
 
 info:
   name: >
-    EmbedPress <= 3.8.2 - Authenticated (Contributor+) Stored Cross-Site Scripting via Shortcode
+    EmbedPress <= 3.9.4 - Missing Authorization
   author: topscoder
-  severity: low
+  severity: high
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/b340eda1-e9d2-40b6-89f9-41d995ce3555?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/a7cf1c70-9778-4b50-b494-d0b1d0277b35?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -17,7 +18,7 @@ info:
     fofa-query: "wp-content/plugins/embedpress/"
     google-query: inurl:"/wp-content/plugins/embedpress/"
     shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,embedpress,low
+  tags: cve,wordpress,wp-plugin,embedpress,high
 
 http:
   - method: GET
@@ -55,4 +56,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '<= 3.8.2')
+          - compare_versions(version, '< 3.9.5')

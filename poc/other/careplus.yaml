@@ -1,21 +1,19 @@
 id: careplus
 
 info:
-  name: >
-    CarePlus - Health & Medical Responsive WordPress Theme <= 1.2 - Cross-Site Scripting
+  name: "CarePlus - Health & Medical Responsive WordPress Theme <= 1.2 - Cross-Site Scripting"
   author: topscoder
   severity: high
-  description: >
-    
+  description: "The CarePlus - Health & Medical Responsive WordPress Theme for WordPress is vulnerable to Reflected Cross-Site Scripting via the ‘s’ parameter in versions up to, and including, 1.2 due to insufficient input sanitization and output escaping. This makes it possible for unauthenticated attackers to inject arbitrary web scripts in pages that execute if they can successfully trick a user into performing an action such as clicking on a link."
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/a514558c-4ccc-42cf-920e-7c73c80df28e?source=api-scan
+
   classification:
-    cvss-metrics: 
-    cvss-score: 
-    cve-id: 
+    cvss-metrics:
+    cvss-score:
+    cve-id:
   metadata:
-    fofa-query: "wp-content/themes/careplus/"
-    google-query: inurl:"/wp-content/themes/careplus/"
+    fofa-query: "wp-content/unknown/careplus/"
+    google-query: inurl:"/wp-content/unknown/careplus/"
     shodan-query: 'vuln:'
   tags: cve,wordpress,wp-theme,careplus,high
 
@@ -55,4 +53,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '<= 1.2')
+          - compare_versions(version, '<=  1.2')

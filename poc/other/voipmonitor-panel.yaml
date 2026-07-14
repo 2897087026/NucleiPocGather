@@ -1,4 +1,5 @@
 id: voipmonitor-panel
+
 info:
   name: VoipMonitor panel
   author: Yanyun
@@ -6,15 +7,18 @@ info:
   metadata:
     shodan-query: http.title:"VoIPmonitor"
   tags: panel,voipmonitor,login
+
 requests:
   - method: GET
     path:
       - '{{BaseURL}}'
+
     matchers-condition: and
     matchers:
       - type: status
         status:
           - 200
+
       - type: word
         words:
           - "appShareUrl = 'share.voipmonitor.org'"

@@ -1,11 +1,10 @@
 id: basic-xss-prober
 
 info:
-  name: Basic XSS Prober - Cross-Site Scripting
-  author: nadino,geeknik
-  description: A cross-site scripting vulnerability was discovered via generic testing. Manual testing is needed to verify exploitation.
+  name: Basic XSS Prober
+  author: nadino & geeknik
   severity: low
-  tags: xss,generic
+  tags: xss
 
   # Basic XSS prober
   # Manual testing needed for exploitation
@@ -30,5 +29,3 @@ requests:
       - type: status
         status:
           - 200
-
-# Enhanced by mp on 2022/09/22

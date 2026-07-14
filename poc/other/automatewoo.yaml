@@ -2,13 +2,14 @@ id: automatewoo
 
 info:
   name: >
-    AutomateWoo <= 5.7.5 - Cross-Site Request Forgery
+    AutomateWoo <= 5.7.1 - Cross-Site Request Forgery
   author: topscoder
   severity: medium
   description: >
     
   reference:
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/a33c8a80-e11e-403d-9eb0-e1c5b59204b0?source=api-scan
+    - https://github.com/topscoder/nuclei-wordfence-cve
+    - https://www.wordfence.com/threat-intel/vulnerabilities/id/540de1b8-eb1f-4f9d-b45c-d3d5f11b642d?source=api-scan
   classification:
     cvss-metrics: 
     cvss-score: 
@@ -55,4 +56,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '<= 5.7.5')
+          - compare_versions(version, '<= 5.7.1')
