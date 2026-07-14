@@ -2,24 +2,69 @@
 NucleiPocGather，每日更新
 
 这个项目是一个 Python 脚本，用于批量克隆 GitHub 项目，获取 Nuclei POC，并将 POC 按类别分类存放到文件夹中。同时，使用 GitHub Action 每日自动运行脚本。
-# POC 详情统计
+<!-- BEGIN_POC_STATS -->
 
-> **当前项目 POC 更新时间：**`2026-07-14 08:44`
+## 📊 POC 详情统计
 
-| ID | 标签      | 数量 | 目录       | 数量 | 严重性   | 数量 |
-|:---| :-------- | :--- | :--------- | :--- | :------- | :--- |
-| 1 | cve | 88044 | other | 56007 | medium | 36965 |
-| 2 | wordpress | 81448 | cve | 43358 | low | 29804 |
-| 3 | wp-plugin | 73981 | sql | 8723 | info | 27400 |
-| 4 | candidate | 33446 | wordpress | 7188 | high | 25486 |
-| 5 | medium | 28173 | auth | 4403 | critical | 14984 |
-| 6 | low | 27576 | detect | 1847 | unknown | 135 |
-| 7 | tech | 18260 | remote_code_execution | 1582 | meduim | 19 |
-| 8 | detect | 17422 | microsoft | 1381 | informative | 18 |
-| 9 | high | 14417 | web | 1375 | hight | 15 |
-| 10 | service | 13836 | api | 1105 | cretical | 4 |
+| 指标 | 数值 |
+|:-----|:----:|
+| **更新时间** | `2026-07-14 16:43` |
+| **POC 总数** | 151,780 |
+| **分类数量** | 85 |
 
-**81 个目录，44572 个文件**
+### 🏷️ 标签 Top 10
+
+| 排名 | 标签 | 数量 |
+|:---:|:-----|:----:|
+| 1 | `cve` | 100,457 |
+| 2 | `wordpress` | 94,128 |
+| 3 | `wp-plugin` | 86,169 |
+| 4 | `candidate` | 33,459 |
+| 5 | `low` | 33,027 |
+| 6 | `medium` | 32,683 |
+| 7 | `tech` | 18,223 |
+| 8 | `detect` | 17,369 |
+| 9 | `high` | 16,248 |
+| 10 | `service` | 13,835 |
+
+### 📂 分类 Top 10
+
+| 排名 | 分类 | 数量 |
+|:---:|:-----|:----:|
+| 1 | `other` | 56,118 |
+| 2 | `cve` | 53,722 |
+| 3 | `sql` | 10,273 |
+| 4 | `wordpress` | 7,241 |
+| 5 | `auth` | 4,319 |
+| 6 | `detect` | 1,854 |
+| 7 | `remote_code_execution` | 1,592 |
+| 8 | `microsoft` | 1,402 |
+| 9 | `web` | 1,356 |
+| 10 | `api` | 1,097 |
+
+### ⚠️ 严重性分布
+
+| 严重性 | 数量 |
+|:------|:----:|
+| Critical | 15,855 |
+| High | 27,232 |
+| Medium | 41,576 |
+| Low | 35,240 |
+| Info | 27,342 |
+| Unknown | 133 |
+| Hight | 15 |
+| Ciritical | 1 |
+| Informative | 19 |
+| Highx | 1 |
+| Cretical | 4 |
+| Meduim | 18 |
+| Criticall | 1 |
+| __cve_severity__ | 1 |
+| Severe | 1 |
+| None | 1 |
+
+<!-- END_POC_STATS -->
+
 ## 如何使用
 
 ### 克隆项目
@@ -58,8 +103,7 @@ python NucleiPocGather.py
 
 - `NucleiPocGather.py`: 收集全网 Nuclei POC 的脚本文件。
 - `DeWeight.py`: 对现有的 Nuclei POC 进行进一步去重的脚本文件。
-- `WirteREADME.py`: 统计现有的 POC 并更新 README.md 文件。
+- `WirteREADME.py`: 统计 POC 并更新 README.md 文件。
 - `repo.txt`: Nuclei POC 仓库列表。
 - `poc.txt`: 已存档 POC 列表。
 - `poc/`: 存放分类后的 Nuclei POC 文件夹。
-

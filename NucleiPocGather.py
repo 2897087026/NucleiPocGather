@@ -1,12 +1,15 @@
+import glob
 import os
 import shutil
-import hashlib
+import subprocess
+import time
 import requests
 from collections import defaultdict
 from tqdm import tqdm
 import concurrent.futures
 import WirteREADME
 from DeWeight import deWeight
+from utils import streaming_md5, retry, git_run, shell_run
 
 
 class RepoManager:
@@ -37,36 +40,39 @@ class RepoManager:
 
     def process_repos(self, urls):
         for url in urls:
-            parts = url.split('/')
-            if len(parts) >= 2:
-                owner, repo_name = parts[-2], parts[-1]
-                target_dir = os.path.join(self.clone_dir, f"{owner}/{repo_name}".lower())
-            else:
-                print(f"[x] 无效的URL格式: {url}")
-                continue
+            try:
+                parts = url.split('/')
+                if len(parts) >= 2:
+                    owner, repo_name = parts[-2], parts[-1]
+                    target_dir = os.path.join(self.clone_dir, f"{owner}/{repo_name}".lower())
+                else:
+                    print(f"[x] 无效的URL格式: {url}")
+                    continue
 
-            if os.path.isdir(target_dir):
-                self.update_repo(repo_name, target_dir)
-            else:
-                self.clone_repo(url, repo_name, target_dir)
+                if os.path.isdir(target_dir):
+                    self.update_repo(repo_name, target_dir)
+                else:
+                    self.clone_repo(url, repo_name, target_dir)
+            except Exception as e:
+                print(f"[x] 处理仓库 {url} 时出错: {e}")
 
     def update_repo(self, repo_name, target_dir):
         print(f"[+] 更新 {repo_name} 在 {target_dir}")
         try:
-            result = os.system(f"git -C {target_dir} pull")
-            if result != 0:
-                print(f"[x] 更新仓库 {repo_name} 在 {target_dir} 时出错")
-        except Exception as e:
-            print(f"[x] 更新仓库 {repo_name} 在 {target_dir} 时出错: {e}")
+            git_run(["-C", target_dir, "pull", "--rebase"], timeout=120)
+        except subprocess.TimeoutExpired:
+            print(f"[x] 更新仓库 {repo_name} 超时")
+        except subprocess.CalledProcessError as e:
+            print(f"[x] 更新仓库 {repo_name} 时出错: {e}")
 
     def clone_repo(self, url, repo_name, target_dir):
         print(f"[+] 克隆 {repo_name} 到 {target_dir}")
         try:
-            result = os.system(f"git clone {url} {target_dir}")
-            if result != 0:
-                print(f"[x] 克隆仓库 {repo_name} 到 {target_dir} 时出错")
-        except Exception as e:
-            print(f"[x] 克隆仓库 {repo_name} 到 {target_dir} 时出错: {e}")
+            git_run(["clone", "--depth", "1", "--single-branch", url, target_dir], timeout=300)
+        except subprocess.TimeoutExpired:
+            print(f"[x] 克隆仓库 {repo_name} 超时")
+        except subprocess.CalledProcessError as e:
+            print(f"[x] 克隆仓库 {repo_name} 时出错: {e}")
 
     def run(self):
         if not self.ensure_clone_directory():
@@ -80,22 +86,20 @@ class NucleiDownloader:
         self.repo_owner = repo_owner  # 仓库拥有者
         self.repo_name = repo_name  # 仓库名称
 
+    @retry(max_retries=3, delay=3, exceptions=(requests.RequestException,))
     def get_latest_release(self):
         url = f"https://api.github.com/repos/{self.repo_owner}/{self.repo_name}/releases/latest"
-        response = requests.get(url)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            raise Exception("[x] 获取最新版本失败")
+        response = requests.get(url, timeout=30)
+        response.raise_for_status()
+        return response.json()
 
+    @retry(max_retries=3, delay=3, exceptions=(requests.RequestException,))
     def download_file(self, url, dest):
-        response = requests.get(url, stream=True)
-        if response.status_code == 200:
-            with open(dest, 'wb') as f:
-                for chunk in response.iter_content(1024):
-                    f.write(chunk)
-        else:
-            raise Exception(f"[x] 下载文件失败: {url}")
+        response = requests.get(url, stream=True, timeout=60)
+        response.raise_for_status()
+        with open(dest, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=65536):
+                f.write(chunk)
 
     def find_download_url(self, assets, platform='linux', architecture='amd64', file_extension='.zip'):
         for asset in assets:
@@ -122,19 +126,23 @@ class POCValidator:
         self.nuclei_executable = nuclei_executable  # Nuclei可执行文件路径
 
     def get_yaml_files(self):
-        # 获取指定目录下的YAML文件
-        return [f for f in os.listdir(self.poc_dir) if f.endswith('.yaml') or f.endswith('.yml')]
+        """递归获取指定目录下的所有 YAML 文件."""
+        return glob.glob(os.path.join(self.poc_dir, "**/*.yaml"), recursive=True) +                glob.glob(os.path.join(self.poc_dir, "**/*.yml"), recursive=True)
 
     def validate_poc(self, file_path):
-        # 验证POC文件格式
-        command = f"{self.nuclei_executable} -t {file_path} -silent"
-        return_code = os.system(command)
-        return return_code == 0
+        """验证POC文件格式，使用 subprocess."""
+        try:
+            result = subprocess.run(
+                [self.nuclei_executable, "-t", file_path, "-silent"],
+                capture_output=True, text=True, timeout=60
+            )
+            return result.returncode == 0
+        except (subprocess.TimeoutExpired, FileNotFoundError):
+            return False
 
     def process_files(self):
         yaml_files = self.get_yaml_files()
-        for file in yaml_files:
-            file_path = os.path.join(self.poc_dir, file)
+        for file_path in yaml_files:
             print(f"[+] 检查POC {file_path} 中...")
 
             if self.validate_poc(file_path):
@@ -171,13 +179,10 @@ class POCOrganizer:
                 categories.append(category)
         return categories if categories else ["other"]
 
-    def file_hash(self, file_path):
-        # 计算文件哈希值
-        hasher = hashlib.md5()
-        with open(file_path, "rb") as f:
-            buf = f.read()
-            hasher.update(buf)
-        return hasher.hexdigest()
+    @staticmethod
+    def file_hash(file_path):
+        """计算文件哈希值（流式读取）. """
+        return streaming_md5(file_path)
 
     def copy_file_to_categories(self, file_path, categories, file_hash_value):
         # 复制文件到相应分类目录
@@ -226,12 +231,8 @@ class DuplicateFileHandler:
 
     @staticmethod
     def calculate_file_hash(file_path):
-        """计算文件的 MD5 哈希值."""
-        hasher = hashlib.md5()
-        with open(file_path, "rb") as f:
-            buf = f.read()
-            hasher.update(buf)
-        return hasher.hexdigest()
+        """计算文件的 MD5 哈希值（流式读取）. """
+        return streaming_md5(file_path)
 
     def get_yaml_files(self):
         """递归遍历给定目录下的所有 .yaml 文件，并返回文件路径列表."""
@@ -307,7 +308,7 @@ def pocfenlei():
         "magento": ["magento"],
         "php": ["php"],
         "airflow": ["airflow"],
-        "aws": ["aws", "amazon", "ec2", "s3", "lambda", "cloudfront", "cloudfront"],
+        "aws": ["aws", "amazon", "ec2", "s3", "lambda", "cloudfront"],
         "apache": ["apache"],
         "cpanel": ["cpanel"],
         "docker": ["docker", "container", "kubernetes"],
@@ -380,12 +381,15 @@ def pocfenlei():
     organizer.process_files()
     organizer.print_summary()
 
-    os.system('rm -rf clone-templates')
+    shutil.rmtree('clone-templates', ignore_errors=True)
 
 
 def getPocName():
-    os.system('find . -type f \\( -iname "*.yaml" -o -iname "*.yml" \\)| sort > poc.txt')
-    print("[+] 所有的 POC 名称已写入文件 poc.txt")
+    yaml_files = sorted(glob.glob("**/*.yaml", recursive=True) + glob.glob("**/*.yml", recursive=True))
+    with open("poc.txt", "w") as f:
+        for fp in yaml_files:
+            f.write("./" + fp + "\n")
+    print(f"[+] 所有的 POC 名称已写入文件 poc.txt")
 
 
 def run():
@@ -398,8 +402,8 @@ def run():
     # 2. 下载 nuclei
     downloader = NucleiDownloader(repo_owner="projectdiscovery", repo_name="nuclei")
     downloader.download_latest_release(dest_file="nuclei.zip")
-    os.system("unzip nuclei.zip nuclei")
-    os.system("rm -rf nuclei.zip")
+    shell_run("unzip -o nuclei.zip nuclei", timeout=30)
+    shell_run("rm -rf nuclei.zip", timeout=10)
 
     # 3. 检查 POC 能否使用，不能使用的进行删除
     poc_validator = POCValidator(poc_dir="clone-templates")
@@ -420,7 +424,7 @@ def run():
     deWeight()
 
     # 8.更新 README 文件
-    WirteREADME.wirte_readme()
+    WirteREADME.write_readme()
 
 
 if __name__ == '__main__':
